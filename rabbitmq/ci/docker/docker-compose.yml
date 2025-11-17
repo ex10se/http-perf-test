@@ -1,0 +1,26 @@
+name: perf-test-rabbitmq
+
+networks:
+  perf-test-rmq:
+    name: perf-test-rmq
+
+volumes:
+  perf_test_rabbitmq_data: { driver: local }
+
+
+services:
+  rabbitmq:
+    restart: always
+    image: rabbitmq:4.1.3-management-alpine
+    expose: [ 5672, 15672 ]
+    container_name: rabbitmq
+    volumes:
+      - "perf_test_rabbitmq_data:/var/lib/rabbitmq"
+      - "./rabbitmq/configs/rabbitmq.conf:/etc/rabbitmq/conf.d/20-rabbitmq.conf"
+    environment:
+      RABBITMQ_DEFAULT_USER: 'rmq'
+      RABBITMQ_DEFAULT_PASS: 'rmq'
+      RABBITMQ_DEFAULT_VHOST: 'rmq'
+    healthcheck: { test: [ "CMD-SHELL", "rabbitmq-diagnostics -q ping" ], interval: 30s, timeout: 30s, retries: 3 }
+    networks:
+      - perf-test-rmq

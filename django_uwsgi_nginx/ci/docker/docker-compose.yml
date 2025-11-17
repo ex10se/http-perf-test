@@ -1,0 +1,41 @@
+name: perf-test-django-uwsgi-nginx
+
+services:
+  uwsgi:
+    build:
+      context: ../../
+      dockerfile: ci/docker/backend/Dockerfile
+    container_name: django_backend
+    restart: unless-stopped
+    volumes:
+      - uwsgi_socket:/tmp/uwsgi
+      - ../../app/src:/app
+    environment:
+      - DJANGO_SETTINGS_MODULE=app.settings
+      - PYTHONUNBUFFERED=1
+      - DSN__RABBITMQ=${DSN__RABBITMQ}
+    networks:
+      - perf-test-rmq
+
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    container_name: nginx_proxy
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    volumes:
+      - uwsgi_socket:/tmp/uwsgi
+    depends_on:
+      - uwsgi
+    networks:
+      - perf-test-rmq
+
+volumes:
+  uwsgi_socket:
+
+networks:
+  perf-test-rmq:
+    external: true
+    name: perf-test-rmq
