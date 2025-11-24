@@ -62,10 +62,10 @@
 ```
 
 **Результаты тестирования:**
-- **Максимальный стабильный RPS:** ~1093
-- **Success rate:** 100%
-- **Latency (mean):** 7.359ms
-- **Latency (p95):** 12.804ms
+- **Максимальный стабильный RPS:** ~1250
+- **Success rate:** 99.8%
+- **Latency (mean):** 17.17ms
+- **Latency (p95):** 70.376ms
 
 ### 2. Django + Gunicorn + Nginx
 
@@ -99,9 +99,9 @@
 
 **Результаты тестирования:**
 - **Максимальный стабильный RPS:** ~1062
-- **Success rate:** 99.99%
-- **Latency (mean):** 104.732ms
-- **Latency (p95):** 502.11ms
+- **Success rate:** 100%
+- **Latency (mean):** 132.589ms
+- **Latency (p95):** 634.141ms
 
 ### 3. Django + Uvicorn + Nginx
 
