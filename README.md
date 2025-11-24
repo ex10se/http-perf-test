@@ -56,22 +56,52 @@
 - Алгоритм: Бинарный поиск максимального RPS
 - Критерий успеха: Success rate ≥ 99.5%
 
-**Результаты тестирования:**
-- **Максимальный стабильный RPS:** ~1046
-- **Success rate:** 99.77%
-- **Latency (mean):** 11.49ms
-- **Latency (p95):** 35.5ms
-- **Проблемный RPS:** 1054 (98.94% success)
-
 **Запуск тестов:**
 ```bash
-cd django_uwsgi_nginx/load_test
-./benchmark.sh
+(cd django_uwsgi_nginx/load_test && ./benchmark.sh)
 ```
+
+**Результаты тестирования:**
+- **Максимальный стабильный RPS:** ~1093
+- **Success rate:** 100%
+- **Latency (mean):** 7.359ms
+- **Latency (p95):** 12.804ms
 
 ### 2. Django + Gunicorn + Nginx
 
-TODO
+**Стек технологий:**
+- Django 3.2.17 + Django REST Framework 3.13.1
+- Gunicorn 21.2.0
+- Nginx 1.25-alpine
+- Python 3.8
+- RabbitMQ 4.1.3
+- Pika 1.3.2
+- vegeta для тестирования (требует локальной установки)
+
+**Конфигурация Gunicorn:**
+- Процессы: 5
+- Потоки на процесс: 2
+- Всего worker'ов: 10
+- Harakiri: 30s
+- Buffer size: 32KB
+- Max requests: 5000
+
+**Метод тестирования:**
+- Инструмент: Vegeta
+- Длительность: 30 секунд на тест
+- Алгоритм: Бинарный поиск максимального RPS
+- Критерий успеха: Success rate ≥ 99.5%
+
+**Запуск тестов:**
+```bash
+(cd django_gunicorn_nginx/load_test && ./benchmark.sh)
+```
+
+**Результаты тестирования:**
+- **Максимальный стабильный RPS:** ~1062
+- **Success rate:** 99.99%
+- **Latency (mean):** 104.732ms
+- **Latency (p95):** 502.11ms
 
 ### 3. Django + Uvicorn + Nginx
 

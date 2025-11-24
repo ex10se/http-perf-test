@@ -1,0 +1,11 @@
+DJANGO_GUNICORN_NGINX_EXCHANGE = 'django_gunicorn_nginx'
+
+QUEUE_DJANGO_GUNICORN_NGINX = 'django-gunicorn-nginx'
+QUEUE_SYSTEM_DJANGO_GUNICORN_NGINX = 'system-django-gunicorn-nginx'
+
+QUEUES_DECLARATION = (
+    {
+        'exchange': DJANGO_GUNICORN_NGINX_EXCHANGE,
+        'queues': [QUEUE_DJANGO_GUNICORN_NGINX, QUEUE_SYSTEM_DJANGO_GUNICORN_NGINX],
+    },
+)

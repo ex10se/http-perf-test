@@ -1,13 +1,13 @@
-name: perf-test-django-uwsgi-nginx
+name: perf-test-django-gunicorn-nginx
 
 services:
-  uwsgi:
+  gunicorn:
     build:
       context: ../../
       dockerfile: ci/docker/backend/Dockerfile
     restart: unless-stopped
     volumes:
-      - uwsgi_socket:/tmp/uwsgi
+      - gunicorn_socket:/tmp/gunicorn
       - ../../app/src:/app
     environment:
       - DJANGO_SETTINGS_MODULE=app.settings
@@ -22,16 +22,16 @@ services:
       dockerfile: Dockerfile
     restart: unless-stopped
     ports:
-      - "8080:80"
+      - "8081:80"
     volumes:
-      - uwsgi_socket:/tmp/uwsgi
+      - gunicorn_socket:/tmp/gunicorn
     depends_on:
-      - uwsgi
+      - gunicorn
     networks:
       - perf-test-rmq
 
 volumes:
-  uwsgi_socket:
+  gunicorn_socket:
 
 networks:
   perf-test-rmq:
