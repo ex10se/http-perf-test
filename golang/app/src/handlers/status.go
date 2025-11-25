@@ -6,8 +6,8 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/ex10se/http-peft-test/golang/models"
-	"github.com/ex10se/http-peft-test/golang/rabbitmq"
+	"github.com/ex10se/http-perf-test/golang/models"
+	"github.com/ex10se/http-perf-test/golang/rabbitmq"
 )
 
 // StatusHandler обрабатывает запросы к /status/status/

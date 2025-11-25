@@ -8,9 +8,9 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 from sync.base import get_rabbit_client
 from sync.queues import (
-    DJANGO_HYPERCORN_NGINX_EXCHANGE,
-    QUEUE_DJANGO_HYPERCORN_NGINX,
-    QUEUE_SYSTEM_DJANGO_HYPERCORN_NGINX,
+    DJANGO_HYPERCORN_NGINX_HTTP2_EXCHANGE,
+    QUEUE_DJANGO_HYPERCORN_NGINX_HTTP2,
+    QUEUE_SYSTEM_DJANGO_HYPERCORN_NGINX_HTTP2,
 )
 from sync.serializers import StatusEventSerializer
 
@@ -50,14 +50,14 @@ class StatusViewSet(ViewSet):
                 track_data = event.get('trackData') or {}
                 is_system = track_data.get('is_system', False)
                 queue_name = (
-                    QUEUE_SYSTEM_DJANGO_HYPERCORN_NGINX
+                    QUEUE_SYSTEM_DJANGO_HYPERCORN_NGINX_HTTP2
                     if is_system
-                    else QUEUE_DJANGO_HYPERCORN_NGINX
+                    else QUEUE_DJANGO_HYPERCORN_NGINX_HTTP2
                 )
 
                 # Отправляем событие в очередь
                 await base_sync.publish_once(
-                    exchange=DJANGO_HYPERCORN_NGINX_EXCHANGE,
+                    exchange=DJANGO_HYPERCORN_NGINX_HTTP2_EXCHANGE,
                     routing_key=queue_name,
                     body=json.dumps(event),
                 )

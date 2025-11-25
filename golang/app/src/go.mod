@@ -1,4 +1,4 @@
-module github.com/ex10se/http-peft-test/golang
+module github.com/ex10se/http-perf-test/golang
 
 go 1.25
 

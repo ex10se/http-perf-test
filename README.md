@@ -114,22 +114,24 @@
 ```
 
 **Результаты тестирования:**
-- **Максимальный стабильный RPS:** ~1681
+- **Максимальный стабильный RPS:** ~1828
 - **Success rate:** 100%
-- **Latency (mean):** 14.696ms
-- **Latency (p95):** 32.11ms
+- **Latency (mean):** 29.662ms
+- **Latency (p95):** 86.651ms
 
 ### Django + Hypercorn + Nginx + http/2
 
 **Стек технологий:**
 - Python 3.8
-- Django 3.2.17 + Django REST Framework 3.13.1
-- uWSGI 2.0.30
-- Pika 1.3.2
+- Django 4.1 + adrf 0.1.12
+- Hypercorn 0.17.3
+- Aio-pika 9.5.2
 - Nginx 1.25-alpine
 
 **Конфигурация сервера:**
-- 
+- Workers: 10
+- Backlog: 2048
+- Keep-alive: 5s
 
 **Запуск тестов:**
 ```bash
@@ -137,11 +139,10 @@
 ```
 
 **Результаты тестирования:**
-<TODO>
-- **Максимальный стабильный RPS:** ~*
-- **Success rate:** *%
-- **Latency (mean):** *ms
-- **Latency (p95):** *ms
+- **Максимальный стабильный RPS:** ~1875
+- **Success rate:** 100%
+- **Latency (mean):** 35.515ms
+- **Latency (p95):** 125.394ms
 
 ### Django + Uvicorn + Nginx
 

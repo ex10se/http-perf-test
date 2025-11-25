@@ -1,0 +1,11 @@
+DJANGO_HYPERCORN_NGINX_HTTP2_EXCHANGE = 'django_hypercorn_nginx_http2'
+
+QUEUE_DJANGO_HYPERCORN_NGINX_HTTP2 = 'django-hypercorn-nginx-http2'
+QUEUE_SYSTEM_DJANGO_HYPERCORN_NGINX_HTTP2 = 'system-django-hypercorn-nginx-http2'
+
+QUEUES_DECLARATION = (
+    {
+        'exchange': DJANGO_HYPERCORN_NGINX_HTTP2_EXCHANGE,
+        'queues': [QUEUE_DJANGO_HYPERCORN_NGINX_HTTP2, QUEUE_SYSTEM_DJANGO_HYPERCORN_NGINX_HTTP2],
+    },
+)
