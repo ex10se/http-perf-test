@@ -4,7 +4,7 @@ DURATION=30s
 MIN_SUCCESS_RATE=0
 MAX_FAIL_RATE=999999
 
-echo "=== Нагрузочное тестирование golang ==="
+echo "=== Нагрузочное тестирование django+hypercorn+nginx ==="
 echo "Длительность каждого теста: $DURATION"
 echo "Бинарный поиск максимального RPS"
 echo ""

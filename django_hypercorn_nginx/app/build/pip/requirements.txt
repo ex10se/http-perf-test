@@ -1,0 +1,5 @@
+Django==4.1
+adrf==0.1.12
+aio-pika==9.5.2
+python-dotenv==0.10.1
+hypercorn==0.17.3

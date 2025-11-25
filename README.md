@@ -66,35 +66,6 @@
 - **Latency (mean):** 17.17ms
 - **Latency (p95):** 70.376ms
 
-### Django + uWSGI + Nginx + http/2
-
-**Стек технологий:**
-- Python 3.8
-- Django 3.2.17 + Django REST Framework 3.13.1
-- uWSGI 2.0.30
-- Pika 1.3.2
-- Nginx 1.25-alpine
-
-**Конфигурация сервера:**
-- Процессы: 5
-- Потоки на процесс: 2
-- Всего worker'ов: 10
-- Harakiri: 30s
-- Buffer size: 32KB
-- Max requests: 5000
-
-**Запуск тестов:**
-```bash
-(cd django_uwsgi_nginx_http2/load_test && ./benchmark.sh)
-```
-
-**Результаты тестирования:**
-<TODO>
-- **Максимальный стабильный RPS:** ~*
-- **Success rate:** *%
-- **Latency (mean):** *ms
-- **Latency (p95):** *ms
-
 ### Django + Gunicorn + Nginx
 
 **Стек технологий:**
@@ -122,6 +93,55 @@
 - **Success rate:** 100%
 - **Latency (mean):** 132.589ms
 - **Latency (p95):** 634.141ms
+
+### Django + Hypercorn + Nginx
+
+**Стек технологий:**
+- Python 3.8
+- Django 4.1 + adrf 0.1.12
+- Hypercorn 0.17.3
+- Aio-pika 9.5.2
+- Nginx 1.25-alpine
+
+**Конфигурация сервера:**
+- Workers: 10
+- Backlog: 2048
+- Keep-alive: 5s
+
+**Запуск тестов:**
+```bash
+(cd django_hypercorn_nginx/load_test && ./benchmark.sh)
+```
+
+**Результаты тестирования:**
+- **Максимальный стабильный RPS:** ~1681
+- **Success rate:** 100%
+- **Latency (mean):** 14.696ms
+- **Latency (p95):** 32.11ms
+
+### Django + Hypercorn + Nginx + http/2
+
+**Стек технологий:**
+- Python 3.8
+- Django 3.2.17 + Django REST Framework 3.13.1
+- uWSGI 2.0.30
+- Pika 1.3.2
+- Nginx 1.25-alpine
+
+**Конфигурация сервера:**
+- 
+
+**Запуск тестов:**
+```bash
+(cd django_hypercorn_nginx_http2/load_test && ./benchmark.sh)
+```
+
+**Результаты тестирования:**
+<TODO>
+- **Максимальный стабильный RPS:** ~*
+- **Success rate:** *%
+- **Latency (mean):** *ms
+- **Latency (p95):** *ms
 
 ### Django + Uvicorn + Nginx
 
