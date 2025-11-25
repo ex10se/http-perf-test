@@ -16,7 +16,7 @@ COPY ci/docker/backend/entrypoint.sh /entrypoint.sh
 
 COPY app/src /app/
 
-RUN mkdir -p /tmp/hypercorn_http2
+RUN mkdir -p /tmp/hypercorn
 
 RUN wget https://github.com/jwilder/dockerize/releases/download/v0.6.1/dockerize-linux-amd64-v0.6.1.tar.gz && \
     tar -C /usr/local/bin -xzvf dockerize-linux-amd64-v0.6.1.tar.gz && \
@@ -25,11 +25,11 @@ RUN wget https://github.com/jwilder/dockerize/releases/download/v0.6.1/dockerize
 
 RUN chmod +x /entrypoint.sh
 
-RUN useradd -m -u 1000 hypercorn_http2 && \
-  chown -R hypercorn_http2:hypercorn_http2 /app && \
-  chown -R hypercorn_http2:hypercorn_http2 /tmp/hypercorn_http2
+RUN useradd -m -u 1000 hypercorn && \
+  chown -R hypercorn:hypercorn /app && \
+  chown -R hypercorn:hypercorn /tmp/hypercorn
 
-USER hypercorn_http2
+USER hypercorn
 
 EXPOSE 8000
 

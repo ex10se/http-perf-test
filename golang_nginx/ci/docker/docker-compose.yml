@@ -1,4 +1,4 @@
-name: perf-test-golang
+name: perf-test-golang-nginx
 
 services:
   golang:
@@ -7,7 +7,7 @@ services:
       dockerfile: ci/docker/backend/Dockerfile
     restart: unless-stopped
     volumes:
-      - golang_socket:/tmp/golang
+      - golang_nginx_socket:/tmp/golang
     environment:
       - DSN__RABBITMQ=${DSN__RABBITMQ}
       - SOCKET_PATH=/tmp/golang/app.sock
@@ -22,14 +22,14 @@ services:
     ports:
       - "8082:80"
     volumes:
-      - golang_socket:/tmp/golang
+      - golang_nginx_socket:/tmp/golang
     depends_on:
       - golang
     networks:
       - perf-test-rmq
 
 volumes:
-  golang_socket:
+  golang_nginx_socket:
 
 networks:
   perf-test-rmq:

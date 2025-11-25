@@ -1,13 +1,13 @@
 name: perf-test-django-hypercorn-nginx_http2
 
 services:
-  hypercorn_http2:
+  hypercorn:
     build:
       context: ../../
       dockerfile: ci/docker/backend/Dockerfile
     restart: unless-stopped
     volumes:
-      - hypercorn_http2_socket:/tmp/hypercorn_http2
+      - hypercorn_http2_socket:/tmp/hypercorn
       - ../../app/src:/app
     environment:
       - DJANGO_SETTINGS_MODULE=app.settings
@@ -28,9 +28,9 @@ services:
     ports:
       - "8084:80"
     volumes:
-      - hypercorn_http2_socket:/tmp/hypercorn_http2
+      - hypercorn_http2_socket:/tmp/hypercorn
     depends_on:
-      - hypercorn_http2
+      - hypercorn
     networks:
       - perf-test-rmq
 

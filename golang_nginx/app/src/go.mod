@@ -1,4 +1,4 @@
-module github.com/ex10se/http-perf-test/golang
+module github.com/ex10se/http-perf-test/golang_nginx
 
 go 1.25
 

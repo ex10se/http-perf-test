@@ -191,7 +191,7 @@
 - **Latency (mean):** *ms
 - **Latency (p95):** *ms
 
-### Golang
+### Golang + Nginx
 
 **Стек технологий:**
 - Go 1.25.1
@@ -205,7 +205,7 @@
 
 **Запуск тестов:**
 ```bash
-(cd golang/load_test && ./benchmark.sh)
+(cd golang_nginx/load_test && ./benchmark.sh)
 ```
 
 **Результаты тестирования:**
@@ -214,7 +214,7 @@
 - **Latency (mean):** 100.654ms
 - **Latency (p95):** 371.543ms
 
-### Golang + http/2
+### Golang + Nginx + http/2
 
 **Стек технологий:**
 - Go 1.25.1
@@ -228,7 +228,7 @@
 
 **Запуск тестов:**
 ```bash
-(cd golang_http2/load_test && ./benchmark.sh)
+(cd golang_nginx_http2/load_test && ./benchmark.sh)
 ```
 
 **Результаты тестирования:**
@@ -238,7 +238,7 @@
 - **Latency (mean):** *ms
 - **Latency (p95):** *ms
 
-### Golang + fasthttp
+### Golang + fasthttp + Nginx
 
 **Стек технологий:**
 - Go 1.25.1
@@ -252,7 +252,7 @@
 
 **Запуск тестов:**
 ```bash
-(cd golang_fasthttp/load_test && ./benchmark.sh)
+(cd golang_fasthttp_nginx/load_test && ./benchmark.sh)
 ```
 
 **Результаты тестирования:**
@@ -262,7 +262,7 @@
 - **Latency (mean):** *ms
 - **Latency (p95):** *ms
 
-### Golang + Gin
+### Golang + Gin + Nginx
 
 **Стек технологий:**
 - Go 1.25.1
@@ -276,7 +276,7 @@
 
 **Запуск тестов:**
 ```bash
-(cd golang_gin/load_test && ./benchmark.sh)
+(cd golang_gin_nginx/load_test && ./benchmark.sh)
 ```
 
 **Результаты тестирования:**
@@ -286,7 +286,7 @@
 - **Latency (mean):** *ms
 - **Latency (p95):** *ms
 
-### Golang + Echo
+### Golang + Echo + Nginx
 
 **Стек технологий:**
 - Go 1.25.1
@@ -300,7 +300,7 @@
 
 **Запуск тестов:**
 ```bash
-(cd golang_echo/load_test && ./benchmark.sh)
+(cd golang_echo_nginx/load_test && ./benchmark.sh)
 ```
 
 **Результаты тестирования:**

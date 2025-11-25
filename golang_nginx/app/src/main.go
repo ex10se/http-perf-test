@@ -11,9 +11,9 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/ex10se/http-perf-test/golang/config"
-	"github.com/ex10se/http-perf-test/golang/handlers"
-	"github.com/ex10se/http-perf-test/golang/rabbitmq"
+	"github.com/ex10se/http-perf-test/golang_nginx/config"
+	"github.com/ex10se/http-perf-test/golang_nginx/handlers"
+	"github.com/ex10se/http-perf-test/golang_nginx/rabbitmq"
 )
 
 func main() {
