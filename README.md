@@ -38,17 +38,16 @@
 
 ## Реализации
 
-### 1. Django + uWSGI + Nginx
+### Django + uWSGI + Nginx
 
 **Стек технологий:**
 - Python 3.8
 - Django 3.2.17 + Django REST Framework 3.13.1
 - uWSGI 2.0.30
-- Nginx 1.25-alpine
-- RabbitMQ 4.1.3
 - Pika 1.3.2
+- Nginx 1.25-alpine
 
-**Конфигурация uWSGI:**
+**Конфигурация сервера:**
 - Процессы: 5
 - Потоки на процесс: 2
 - Всего worker'ов: 10
@@ -67,17 +66,45 @@
 - **Latency (mean):** 17.17ms
 - **Latency (p95):** 70.376ms
 
-### 2. Django + Gunicorn + Nginx
+### Django + uWSGI + Nginx + http/2
+
+**Стек технологий:**
+- Python 3.8
+- Django 3.2.17 + Django REST Framework 3.13.1
+- uWSGI 2.0.30
+- Pika 1.3.2
+- Nginx 1.25-alpine
+
+**Конфигурация сервера:**
+- Процессы: 5
+- Потоки на процесс: 2
+- Всего worker'ов: 10
+- Harakiri: 30s
+- Buffer size: 32KB
+- Max requests: 5000
+
+**Запуск тестов:**
+```bash
+(cd django_uwsgi_nginx_http2/load_test && ./benchmark.sh)
+```
+
+**Результаты тестирования:**
+<TODO>
+- **Максимальный стабильный RPS:** ~*
+- **Success rate:** *%
+- **Latency (mean):** *ms
+- **Latency (p95):** *ms
+
+### Django + Gunicorn + Nginx
 
 **Стек технологий:**
 - Python 3.8
 - Django 3.2.17 + Django REST Framework 3.13.1
 - Gunicorn 21.2.0
-- Nginx 1.25-alpine
-- RabbitMQ 4.1.3
 - Pika 1.3.2
+- Nginx 1.25-alpine
 
-**Конфигурация Gunicorn:**
+**Конфигурация сервера:**
 - Процессы: 5
 - Потоки на процесс: 2
 - Всего worker'ов: 10
@@ -96,7 +123,54 @@
 - **Latency (mean):** 132.589ms
 - **Latency (p95):** 634.141ms
 
-### 3. Golang
+### Django + Uvicorn + Nginx
+
+**Стек технологий:**
+- Python 3.8
+- Django 3.2.17 + Django REST Framework 3.13.1
+- 
+- Pika 1.3.2
+- Nginx 1.25-alpine
+
+**Конфигурация сервера:**
+- 
+
+**Запуск тестов:**
+```bash
+(cd django_uvicorn_nginx/load_test && ./benchmark.sh)
+```
+
+**Результаты тестирования:**
+<TODO>
+- **Максимальный стабильный RPS:** ~*
+- **Success rate:** *%
+- **Latency (mean):** *ms
+- **Latency (p95):** *ms
+
+### FastAPI + Uvicorn + Nginx
+
+**Стек технологий:**
+- Python 3.8
+-
+- Pika 1.3.2
+- Nginx 1.25-alpine
+
+**Конфигурация сервера:**
+- 
+
+**Запуск тестов:**
+```bash
+(cd fastapi_uvicorn_nginx/load_test && ./benchmark.sh)
+```
+
+**Результаты тестирования:**
+<TODO>
+- **Максимальный стабильный RPS:** ~*
+- **Success rate:** *%
+- **Latency (mean):** *ms
+- **Latency (p95):** *ms
+
+### Golang
 
 **Стек технологий:**
 - Go 1.25.1
@@ -119,26 +193,98 @@
 - **Latency (mean):** 100.654ms
 - **Latency (p95):** 371.543ms
 
-### 3. Django + Uvicorn + Nginx
+### Golang + http/2
 
-TODO
+**Стек технологий:**
+- Go 1.25.1
+- github.com/rabbitmq/amqp091-go v1.10.0
 
-### 4. FastAPI + Uvicorn + Nginx
+**Конфигурация сервера:**
+- Процессы: 5
+- ReadTimeout: 30s
+- WriteTimeout: 30s
+- IdleTimeout: 120s
 
-TODO
+**Запуск тестов:**
+```bash
+(cd golang_http2/load_test && ./benchmark.sh)
+```
 
-### 5. Golang (net/http)
+**Результаты тестирования:**
+<TODO>
+- **Максимальный стабильный RPS:** ~*
+- **Success rate:** *%
+- **Latency (mean):** *ms
+- **Latency (p95):** *ms
 
-TODO
+### Golang + fasthttp
 
-### 6. Golang + fasthttp
+**Стек технологий:**
+- Go 1.25.1
+- 
 
-TODO
+**Конфигурация сервера:**
+- Процессы: 5
+- ReadTimeout: 30s
+- WriteTimeout: 30s
+- IdleTimeout: 120s
 
-### 7. Golang + Gin
+**Запуск тестов:**
+```bash
+(cd golang_fasthttp/load_test && ./benchmark.sh)
+```
 
-TODO
+**Результаты тестирования:**
+<TODO>
+- **Максимальный стабильный RPS:** ~*
+- **Success rate:** *%
+- **Latency (mean):** *ms
+- **Latency (p95):** *ms
 
-### 8. Golang + Echo
+### Golang + Gin
 
-TODO
+**Стек технологий:**
+- Go 1.25.1
+- 
+
+**Конфигурация сервера:**
+- Процессы: 5
+- ReadTimeout: 30s
+- WriteTimeout: 30s
+- IdleTimeout: 120s
+
+**Запуск тестов:**
+```bash
+(cd golang_gin/load_test && ./benchmark.sh)
+```
+
+**Результаты тестирования:**
+<TODO>
+- **Максимальный стабильный RPS:** ~*
+- **Success rate:** *%
+- **Latency (mean):** *ms
+- **Latency (p95):** *ms
+
+### Golang + Echo
+
+**Стек технологий:**
+- Go 1.25.1
+- 
+
+**Конфигурация сервера:**
+- Процессы: 5
+- ReadTimeout: 30s
+- WriteTimeout: 30s
+- IdleTimeout: 120s
+
+**Запуск тестов:**
+```bash
+(cd golang_echo/load_test && ./benchmark.sh)
+```
+
+**Результаты тестирования:**
+<TODO>
+- **Максимальный стабильный RPS:** ~*
+- **Success rate:** *%
+- **Latency (mean):** *ms
+- **Latency (p95):** *ms
