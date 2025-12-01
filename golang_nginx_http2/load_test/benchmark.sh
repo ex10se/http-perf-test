@@ -8,7 +8,7 @@ MAX_FAIL_RATE=999999
 THRESHOLD=99.5
 MAX_RATE_LIMIT=100000
 
-echo "=== Нагрузочное тестирование fastapi+uvicorn+nginx ==="
+echo "=== Нагрузочное тестирование golang+nginx+http2 ==="
 echo "Длительность: $DURATION, Цель: >= $THRESHOLD%"
 
 RATE=1000
@@ -19,7 +19,7 @@ BEST_REPORT=""
 
 while [ $ITERATION -lt $MAX_ITERATIONS ]; do
     ITERATION=$((ITERATION + 1))
-
+    
     echo "----------------------------------------"
     echo "Итерация $ITERATION: $RATE RPS"
     if [ $MAX_FAIL_RATE -eq 999999 ]; then
@@ -50,7 +50,7 @@ while [ $ITERATION -lt $MAX_ITERATIONS ]; do
         echo "❌ Ошибка парсинга"
         exit 1
     fi
-
+    
     echo ""
     echo "Success rate: $SUCCESS%"
     echo ""
@@ -83,7 +83,7 @@ while [ $ITERATION -lt $MAX_ITERATIONS ]; do
     fi
 
     DIFF=$(awk -v max="$MAX_FAIL_RATE" -v min="$MIN_SUCCESS_RATE" 'BEGIN {print (max - min)}')
-
+    
     if [ $FOUND_UPPER_BOUND -eq 1 ] && (( $(awk -v d="$DIFF" 'BEGIN {print (d <= 5)}') )); then
         echo "=== Сходимость достигнута (диапазон < 5 RPS) ==="
         break

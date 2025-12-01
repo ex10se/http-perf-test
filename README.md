@@ -199,8 +199,8 @@
 
 **Результаты тестирования:**
 - **Максимальный стабильный RPS:** ~7593
-- **Latency (mean):** 1ms
-- **Latency (p95):** 3ms
+- **Latency (mean):** 11ms
+- **Latency (p95):** 46ms
 
 ### Golang + Nginx + http/2
 
@@ -215,15 +215,15 @@
 - IdleTimeout: 120s
 
 **Результаты тестирования:**
-<TODO>
-- **Максимальный стабильный RPS:** ~*
-- **Latency (mean):** *ms
-- **Latency (p95):** *ms
+- **Максимальный стабильный RPS:** ~7578
+- **Latency (mean):** 61ms
+- **Latency (p95):** 230ms
 
 ### Golang + fasthttp + Nginx
 
 **Стек технологий:**
 - Go 1.25.1
+- github.com/rabbitmq/amqp091-go v1.10.0
 - 
 
 **Конфигурация сервера:**
@@ -242,6 +242,7 @@
 
 **Стек технологий:**
 - Go 1.25.1
+- github.com/rabbitmq/amqp091-go v1.10.0
 - 
 
 **Конфигурация сервера:**
@@ -260,6 +261,7 @@
 
 **Стек технологий:**
 - Go 1.25.1
+- github.com/rabbitmq/amqp091-go v1.10.0
 - 
 
 **Конфигурация сервера:**

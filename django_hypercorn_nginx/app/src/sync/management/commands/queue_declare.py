@@ -2,7 +2,6 @@ import asyncio
 import logging
 
 from django.core.management import BaseCommand
-
 from sync.base import BaseSync
 from sync.queues import QUEUES_DECLARATION
 
