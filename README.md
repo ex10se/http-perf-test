@@ -170,18 +170,20 @@
 
 **Стек технологий:**
 - Python 3.8
--
-- Pika 1.3.2
+- FastAPI 0.123.0
+- Uvicorn 0.33.0
+- Aio-pika 9.5.2
 - Nginx 1.25-alpine
 
 **Конфигурация сервера:**
-- 
+- Workers: 10
+- Backlog: 2048
+- Keep-alive: 5s
 
 **Результаты тестирования:**
-<TODO>
-- **Максимальный стабильный RPS:** ~*
-- **Latency (mean):** *ms
-- **Latency (p95):** *ms
+- **Максимальный стабильный RPS:** ~11389
+- **Latency (mean):** 17ms
+- **Latency (p95):** 80ms
 
 ### Golang + Nginx
 
@@ -197,8 +199,8 @@
 
 **Результаты тестирования:**
 - **Максимальный стабильный RPS:** ~7593
-- **Latency (mean):** 52ms
-- **Latency (p95):** 794ms
+- **Latency (mean):** 1ms
+- **Latency (p95):** 3ms
 
 ### Golang + Nginx + http/2
 

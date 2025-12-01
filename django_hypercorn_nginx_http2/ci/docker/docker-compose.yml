@@ -26,7 +26,7 @@ services:
       dockerfile: Dockerfile
     restart: unless-stopped
     ports:
-      - "8084:80"
+      - "8083:80"
     volumes:
       - hypercorn_http2:/tmp/hypercorn
     depends_on:

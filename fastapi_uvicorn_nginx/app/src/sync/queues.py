@@ -1,0 +1,11 @@
+FASTAPI_UVICORN_NGINX_EXCHANGE = 'fastapi_uvicorn_nginx'
+
+QUEUE_FASTAPI_UVICORN_NGINX = 'fastapi-uvicorn-nginx'
+QUEUE_SYSTEM_FASTAPI_UVICORN_NGINX = 'system-fastapi-uvicorn-nginx'
+
+QUEUES_DECLARATION = (
+    {
+        'exchange': FASTAPI_UVICORN_NGINX_EXCHANGE,
+        'queues': [QUEUE_FASTAPI_UVICORN_NGINX, QUEUE_SYSTEM_FASTAPI_UVICORN_NGINX],
+    },
+)

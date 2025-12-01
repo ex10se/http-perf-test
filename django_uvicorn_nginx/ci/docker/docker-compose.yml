@@ -26,7 +26,7 @@ services:
       dockerfile: Dockerfile
     restart: unless-stopped
     ports:
-      - "8085:80"
+      - "8084:80"
     volumes:
       - uvicorn:/tmp/uvicorn
     depends_on:

@@ -32,5 +32,4 @@ RUN adduser -D -u 1000 goapp && \
   chown -R goapp:goapp /app && \
   chown -R goapp:goapp /tmp/golang
 USER goapp
-EXPOSE 8080
 ENTRYPOINT ["/entrypoint.sh"]
