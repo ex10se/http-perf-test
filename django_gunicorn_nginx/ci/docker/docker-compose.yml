@@ -7,7 +7,7 @@ services:
       dockerfile: ci/docker/backend/Dockerfile
     restart: unless-stopped
     volumes:
-      - gunicorn_socket:/tmp/gunicorn
+      - gunicorn:/tmp/gunicorn
       - ../../app/src:/app
     environment:
       - DJANGO_SETTINGS_MODULE=app.settings
@@ -24,14 +24,14 @@ services:
     ports:
       - "8081:80"
     volumes:
-      - gunicorn_socket:/tmp/gunicorn
+      - gunicorn:/tmp/gunicorn
     depends_on:
       - gunicorn
     networks:
       - perf-test-rmq
 
 volumes:
-  gunicorn_socket:
+  gunicorn:
 
 networks:
   perf-test-rmq:

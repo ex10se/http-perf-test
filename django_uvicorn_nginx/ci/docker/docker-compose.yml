@@ -1,16 +1,22 @@
-name: perf-test-golang-nginx
+name: perf-test-django-uvicorn-nginx
 
 services:
-  golang:
+  uvicorn:
     build:
       context: ../../
       dockerfile: ci/docker/backend/Dockerfile
     restart: unless-stopped
     volumes:
-      - golang_nginx:/tmp/golang
+      - uvicorn:/tmp/uvicorn
+      - ../../app/src:/app
     environment:
+      - DJANGO_SETTINGS_MODULE=app.settings
+      - PYTHONUNBUFFERED=1
       - DSN__RABBITMQ=${DSN__RABBITMQ}
-      - SOCKET_PATH=/tmp/golang/app.sock
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
     networks:
       - perf-test-rmq
 
@@ -20,16 +26,16 @@ services:
       dockerfile: Dockerfile
     restart: unless-stopped
     ports:
-      - "8082:80"
+      - "8085:80"
     volumes:
-      - golang_nginx:/tmp/golang
+      - uvicorn:/tmp/uvicorn
     depends_on:
-      - golang
+      - uvicorn
     networks:
       - perf-test-rmq
 
 volumes:
-  golang_nginx:
+  uvicorn:
 
 networks:
   perf-test-rmq:

@@ -7,7 +7,7 @@ services:
       dockerfile: ci/docker/backend/Dockerfile
     restart: unless-stopped
     volumes:
-      - hypercorn_http2_socket:/tmp/hypercorn
+      - hypercorn_http2:/tmp/hypercorn
       - ../../app/src:/app
     environment:
       - DJANGO_SETTINGS_MODULE=app.settings
@@ -28,14 +28,14 @@ services:
     ports:
       - "8084:80"
     volumes:
-      - hypercorn_http2_socket:/tmp/hypercorn
+      - hypercorn_http2:/tmp/hypercorn
     depends_on:
       - hypercorn
     networks:
       - perf-test-rmq
 
 volumes:
-  hypercorn_http2_socket:
+  hypercorn_http2:
 
 networks:
   perf-test-rmq:

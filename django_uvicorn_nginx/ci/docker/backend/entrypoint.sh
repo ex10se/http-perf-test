@@ -7,9 +7,8 @@ python manage.py queue_declare
 
 umask 0000
 
-exec hypercorn app.asgi:application \
-  --bind unix:/tmp/hypercorn/app.sock \
+exec uvicorn app.asgi:application \
+  --uds /tmp/uvicorn/app.sock \
   --workers 10 \
-  --worker-class asyncio \
   --backlog 2048 \
-  --keep-alive 5
+  --timeout-keep-alive 5

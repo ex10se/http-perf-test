@@ -4,7 +4,7 @@ DURATION=30s
 MIN_SUCCESS_RATE=0
 MAX_FAIL_RATE=999999
 
-echo "=== Нагрузочное тестирование django+hypercorn+nginx+http2 ==="
+echo "=== Нагрузочное тестирование django+uvicorn+nginx ==="
 echo "Длительность каждого теста: $DURATION"
 echo "Бинарный поиск максимального RPS"
 echo ""
@@ -21,7 +21,7 @@ while [ $ITERATION -lt $MAX_ITERATIONS ]; do
     echo "Диапазон поиска: [$MIN_SUCCESS_RATE, $MAX_FAIL_RATE]"
     echo "----------------------------------------"
     
-    REPORT=$(vegeta attack -h2c -rate=$RATE -duration=$DURATION -targets=vegeta_target.txt | vegeta report -type=text)
+    REPORT=$(vegeta attack -rate=$RATE -duration=$DURATION -targets=vegeta_target.txt | vegeta report -type=text)
     echo "$REPORT"
     
     SUCCESS=$(echo "$REPORT" | grep "Success" | grep -o '[0-9.]*%' | tr -d '%')

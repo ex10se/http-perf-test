@@ -36,6 +36,33 @@
 - Алгоритм: Бинарный поиск максимального RPS
 - Критерий успеха: Success rate ≥ 99.5%
 
+## Запуск тестов
+- Простой запуск
+    ```bash
+    (cd django_gunicorn_nginx/load_test && ./benchmark.sh)
+    ```
+- Запуск с ограничением ресурсов
+    ```bash
+    systemd-run --user --scope -p MemoryLimit=6G -p CPUQuota=80% bash -lc "cd $PWD/django_gunicorn_nginx/load_test  && ./benchmark.sh"
+    ```
+- Холодный запуск (в тестах использовался этот)
+    ```bash
+    export S=<service>
+    find . -path './*/ci/docker/docker-compose.yml' -exec zsh -c 'docker-compose -f {} down -v' \; && docker-compose -f rabbitmq/ci/docker/docker-compose.yml up -d --build && docker-compose -f $S/ci/docker/docker-compose.yml up -d --build && sleep 2 && systemd-run --user --scope -p MemoryLimit=6G -p CPUQuota=80% bash -lc "cd $PWD/$S/load_test  && ./benchmark.sh"
+    
+    # export S=django_uwsgi_nginx
+    # export S=django_gunicorn_nginx
+    # export S=django_hypercorn_nginx
+    # export S=django_hypercorn_nginx_http2
+    # export S=django_uvicorn_nginx
+    # export S=fastapi_uvicorn_nginx
+    # export S=golang_nginx
+    # export S=golang_nginx_http2
+    # export S=golang_fasthttp_nginx
+    # export S=golang_gin_nginx
+    # export S=golang_echo_nginx
+    ```
+
 ## Реализации
 
 ### Django + uWSGI + Nginx
@@ -55,16 +82,10 @@
 - Buffer size: 32KB
 - Max requests: 5000
 
-**Запуск тестов:**
-```bash
-(cd django_uwsgi_nginx/load_test && ./benchmark.sh)
-```
-
 **Результаты тестирования:**
-- **Максимальный стабильный RPS:** ~1250
-- **Success rate:** 99.8%
-- **Latency (mean):** 17.17ms
-- **Latency (p95):** 70.376ms
+- **Максимальный стабильный RPS:** ~1117
+- **Latency (mean):** 7ms
+- **Latency (p95):** 15ms
 
 ### Django + Gunicorn + Nginx
 
@@ -83,16 +104,10 @@
 - Buffer size: 32KB
 - Max requests: 5000
 
-**Запуск тестов:**
-```bash
-(cd django_gunicorn_nginx/load_test && ./benchmark.sh)
-```
-
 **Результаты тестирования:**
-- **Максимальный стабильный RPS:** ~1062
-- **Success rate:** 100%
-- **Latency (mean):** 132.589ms
-- **Latency (p95):** 634.141ms
+- **Максимальный стабильный RPS:** ~1312
+- **Latency (mean):** 1200s
+- **Latency (p95):** 3100s
 
 ### Django + Hypercorn + Nginx
 
@@ -108,16 +123,10 @@
 - Backlog: 2048
 - Keep-alive: 5s
 
-**Запуск тестов:**
-```bash
-(cd django_hypercorn_nginx/load_test && ./benchmark.sh)
-```
-
 **Результаты тестирования:**
-- **Максимальный стабильный RPS:** ~1828
-- **Success rate:** 100%
-- **Latency (mean):** 29.662ms
-- **Latency (p95):** 86.651ms
+- **Максимальный стабильный RPS:** ~1875
+- **Latency (mean):** 24ms
+- **Latency (p95):** 58ms
 
 ### Django + Hypercorn + Nginx + http/2
 
@@ -133,40 +142,29 @@
 - Backlog: 2048
 - Keep-alive: 5s
 
-**Запуск тестов:**
-```bash
-(cd django_hypercorn_nginx_http2/load_test && ./benchmark.sh)
-```
-
 **Результаты тестирования:**
-- **Максимальный стабильный RPS:** ~1875
-- **Success rate:** 100%
-- **Latency (mean):** 35.515ms
-- **Latency (p95):** 125.394ms
+- **Максимальный стабильный RPS:** ~1968
+- **Latency (mean):** 24ms
+- **Latency (p95):** 53ms
 
 ### Django + Uvicorn + Nginx
 
 **Стек технологий:**
 - Python 3.8
-- Django 3.2.17 + Django REST Framework 3.13.1
-- 
-- Pika 1.3.2
+- Django 4.1 + adrf 0.1.12
+- Uvicorn 0.33.0
+- Aio-pika 9.5.2
 - Nginx 1.25-alpine
 
 **Конфигурация сервера:**
-- 
-
-**Запуск тестов:**
-```bash
-(cd django_uvicorn_nginx/load_test && ./benchmark.sh)
-```
+- Workers: 10
+- Backlog: 2048
+- Keep-alive: 5s
 
 **Результаты тестирования:**
-<TODO>
-- **Максимальный стабильный RPS:** ~*
-- **Success rate:** *%
-- **Latency (mean):** *ms
-- **Latency (p95):** *ms
+- **Максимальный стабильный RPS:** ~2250
+- **Latency (mean):** 18ms
+- **Latency (p95):** 40ms
 
 ### FastAPI + Uvicorn + Nginx
 
@@ -179,15 +177,9 @@
 **Конфигурация сервера:**
 - 
 
-**Запуск тестов:**
-```bash
-(cd fastapi_uvicorn_nginx/load_test && ./benchmark.sh)
-```
-
 **Результаты тестирования:**
 <TODO>
 - **Максимальный стабильный RPS:** ~*
-- **Success rate:** *%
 - **Latency (mean):** *ms
 - **Latency (p95):** *ms
 
@@ -203,16 +195,10 @@
 - WriteTimeout: 30s
 - IdleTimeout: 120s
 
-**Запуск тестов:**
-```bash
-(cd golang_nginx/load_test && ./benchmark.sh)
-```
-
 **Результаты тестирования:**
-- **Максимальный стабильный RPS:** ~8067
-- **Success rate:** 100%
-- **Latency (mean):** 100.654ms
-- **Latency (p95):** 371.543ms
+- **Максимальный стабильный RPS:** ~7593
+- **Latency (mean):** 52ms
+- **Latency (p95):** 794ms
 
 ### Golang + Nginx + http/2
 
@@ -226,15 +212,9 @@
 - WriteTimeout: 30s
 - IdleTimeout: 120s
 
-**Запуск тестов:**
-```bash
-(cd golang_nginx_http2/load_test && ./benchmark.sh)
-```
-
 **Результаты тестирования:**
 <TODO>
 - **Максимальный стабильный RPS:** ~*
-- **Success rate:** *%
 - **Latency (mean):** *ms
 - **Latency (p95):** *ms
 
@@ -250,15 +230,9 @@
 - WriteTimeout: 30s
 - IdleTimeout: 120s
 
-**Запуск тестов:**
-```bash
-(cd golang_fasthttp_nginx/load_test && ./benchmark.sh)
-```
-
 **Результаты тестирования:**
 <TODO>
 - **Максимальный стабильный RPS:** ~*
-- **Success rate:** *%
 - **Latency (mean):** *ms
 - **Latency (p95):** *ms
 
@@ -274,15 +248,9 @@
 - WriteTimeout: 30s
 - IdleTimeout: 120s
 
-**Запуск тестов:**
-```bash
-(cd golang_gin_nginx/load_test && ./benchmark.sh)
-```
-
 **Результаты тестирования:**
 <TODO>
 - **Максимальный стабильный RPS:** ~*
-- **Success rate:** *%
 - **Latency (mean):** *ms
 - **Latency (p95):** *ms
 
@@ -298,14 +266,8 @@
 - WriteTimeout: 30s
 - IdleTimeout: 120s
 
-**Запуск тестов:**
-```bash
-(cd golang_echo_nginx/load_test && ./benchmark.sh)
-```
-
 **Результаты тестирования:**
 <TODO>
 - **Максимальный стабильный RPS:** ~*
-- **Success rate:** *%
 - **Latency (mean):** *ms
 - **Latency (p95):** *ms
