@@ -1,4 +1,4 @@
-DJANGO_UWSGI_NGINX_EXCHANGE = 'django_uwsgi_nginx'
+DJANGO_UWSGI_NGINX_EXCHANGE = 'django-uwsgi-nginx'
 
 QUEUE_DJANGO_UWSGI_NGINX = 'django-uwsgi-nginx'
 QUEUE_SYSTEM_DJANGO_UWSGI_NGINX = 'system-django-uwsgi-nginx'

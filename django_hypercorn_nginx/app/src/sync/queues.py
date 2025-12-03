@@ -1,4 +1,4 @@
-DJANGO_HYPERCORN_NGINX_EXCHANGE = 'django_hypercorn_nginx'
+DJANGO_HYPERCORN_NGINX_EXCHANGE = 'django-hypercorn-nginx'
 
 QUEUE_DJANGO_HYPERCORN_NGINX = 'django-hypercorn-nginx'
 QUEUE_SYSTEM_DJANGO_HYPERCORN_NGINX = 'system-django-hypercorn-nginx'

@@ -224,7 +224,7 @@
 **Стек технологий:**
 - Go 1.25.1
 - github.com/rabbitmq/amqp091-go v1.10.0
-- 
+- github.com/valyala/fasthttp v1.68.0
 
 **Конфигурация сервера:**
 - Процессы: 5
@@ -233,10 +233,9 @@
 - IdleTimeout: 120s
 
 **Результаты тестирования:**
-<TODO>
-- **Максимальный стабильный RPS:** ~*
-- **Latency (mean):** *ms
-- **Latency (p95):** *ms
+- **Максимальный стабильный RPS:** ~7584
+- **Latency (mean):** 27ms
+- **Latency (p95):** 105ms
 
 ### Golang + Gin + Nginx
 

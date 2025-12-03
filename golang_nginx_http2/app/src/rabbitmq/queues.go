@@ -1,14 +1,9 @@
 package rabbitmq
 
 const (
-	// Exchange для маршрутизации сообщений
-	ExchangeName = "golang_nginx_http2"
-
-	// Очередь для обычных событий
-	QueueGolang = "golang_nginx_http2"
-
-	// Очередь для системных событий
-	QueueSystemGolang = "system-golang-nginx_http2"
+	ExchangeName      = "golang-nginx-http2"
+	QueueGolang       = "golang-nginx-http2"
+	QueueSystemGolang = "system-golang-nginx-http2"
 )
 
 // GetQueueName возвращает название очереди в зависимости от типа события

@@ -1,4 +1,4 @@
-DJANGO_GUNICORN_NGINX_EXCHANGE = 'django_gunicorn_nginx'
+DJANGO_GUNICORN_NGINX_EXCHANGE = 'django-gunicorn-nginx'
 
 QUEUE_DJANGO_GUNICORN_NGINX = 'django-gunicorn-nginx'
 QUEUE_SYSTEM_DJANGO_GUNICORN_NGINX = 'system-django-gunicorn-nginx'

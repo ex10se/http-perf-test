@@ -1,0 +1,37 @@
+name: perf-test-golang-fasthttp-nginx
+
+services:
+  golang:
+    build:
+      context: ../../
+      dockerfile: ci/docker/backend/Dockerfile
+    restart: unless-stopped
+    volumes:
+      - golang_fasthttp_nginx:/tmp/golang
+    environment:
+      - DSN__RABBITMQ=${DSN__RABBITMQ}
+      - SOCKET_PATH=/tmp/golang/app.sock
+    networks:
+      - perf-test-rmq
+
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "8087:80"
+    volumes:
+      - golang_fasthttp_nginx:/tmp/golang
+    depends_on:
+      - golang
+    networks:
+      - perf-test-rmq
+
+volumes:
+  golang_fasthttp_nginx:
+
+networks:
+  perf-test-rmq:
+    external: true
+    name: perf-test-rmq
