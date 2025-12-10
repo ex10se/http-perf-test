@@ -242,7 +242,7 @@
 **Стек технологий:**
 - Go 1.25.1
 - github.com/rabbitmq/amqp091-go v1.10.0
-- 
+- github.com/gin-gonic/gin v1.11.0
 
 **Конфигурация сервера:**
 - Процессы: 5
@@ -251,10 +251,9 @@
 - IdleTimeout: 120s
 
 **Результаты тестирования:**
-<TODO>
-- **Максимальный стабильный RPS:** ~*
-- **Latency (mean):** *ms
-- **Latency (p95):** *ms
+- **Максимальный стабильный RPS:** ~6327
+- **Latency (mean):** 41ms
+- **Latency (p95):** 235ms
 
 ### Golang + Echo + Nginx
 
