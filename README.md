@@ -83,9 +83,9 @@
 - Max requests: 5000
 
 **Результаты тестирования:**
-- **Максимальный стабильный RPS:** ~1117
-- **Latency (mean):** 7ms
-- **Latency (p95):** 15ms
+- **Максимальный стабильный RPS:** ~1183
+- **Latency (mean):** 6ms
+- **Latency (p95):** 29ms
 
 ### Django + Gunicorn + Nginx
 
@@ -105,9 +105,9 @@
 - Max requests: 5000
 
 **Результаты тестирования:**
-- **Максимальный стабильный RPS:** ~1312
-- **Latency (mean):** 1200s
-- **Latency (p95):** 3100s
+- **Максимальный стабильный RPS:** ~1221
+- **Latency (mean):** 444s
+- **Latency (p95):** 1362s
 
 ### Django + Hypercorn + Nginx
 
@@ -124,9 +124,9 @@
 - Keep-alive: 5s
 
 **Результаты тестирования:**
-- **Максимальный стабильный RPS:** ~1875
-- **Latency (mean):** 24ms
-- **Latency (p95):** 58ms
+- **Максимальный стабильный RPS:** ~1677
+- **Latency (mean):** 69ms
+- **Latency (p95):** 485ms
 
 ### Django + Hypercorn + Nginx + http/2
 
@@ -143,9 +143,9 @@
 - Keep-alive: 5s
 
 **Результаты тестирования:**
-- **Максимальный стабильный RPS:** ~1968
-- **Latency (mean):** 24ms
-- **Latency (p95):** 53ms
+- **Максимальный стабильный RPS:** ~1961
+- **Latency (mean):** 62ms
+- **Latency (p95):** 203ms
 
 ### Django + Uvicorn + Nginx
 
@@ -163,8 +163,8 @@
 
 **Результаты тестирования:**
 - **Максимальный стабильный RPS:** ~2250
-- **Latency (mean):** 18ms
-- **Latency (p95):** 40ms
+- **Latency (mean):** 16ms
+- **Latency (p95):** 39ms
 
 ### FastAPI + Uvicorn + Nginx
 
@@ -181,9 +181,9 @@
 - Keep-alive: 5s
 
 **Результаты тестирования:**
-- **Максимальный стабильный RPS:** ~11389
-- **Latency (mean):** 17ms
-- **Latency (p95):** 80ms
+- **Максимальный стабильный RPS:** ~11377
+- **Latency (mean):** 61ms
+- **Latency (p95):** 149ms
 
 ### Golang + Nginx
 

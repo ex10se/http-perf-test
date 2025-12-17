@@ -71,7 +71,7 @@ class StatusViewSet(ViewSet):
                     'processed': len(serializer_data) - len(errors),
                     'errors': errors
                 },
-                status=status.HTTP_207_MULTI_STATUS,
+                status=status.HTTP_400_BAD_REQUEST,
             )
 
         return Response(

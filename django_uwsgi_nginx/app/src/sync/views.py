@@ -7,7 +7,6 @@ from rest_framework.parsers import JSONParser
 from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet
-
 from sync.base import BaseSync
 from sync.queues import (
     DJANGO_UWSGI_NGINX_EXCHANGE,
@@ -75,7 +74,7 @@ class StatusViewSet(ViewSet):
                     'processed': len(serializer.validated_data) - len(errors),
                     'errors': errors
                 },
-                status=status.HTTP_207_MULTI_STATUS
+                status=status.HTTP_400_BAD_REQUEST,
             )
 
         return Response(

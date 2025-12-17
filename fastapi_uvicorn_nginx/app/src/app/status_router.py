@@ -31,13 +31,13 @@ async def status_endpoint(events: List[StatusEventSchema]):
             track_data = event_dict.get("trackData") or {}
             is_system = track_data.get("is_system", False)
             queue_name = (
-                QUEUE_SYSTEM_DJANGO_UVICORN_NGINX
+                QUEUE_SYSTEM_FASTAPI_UVICORN_NGINX
                 if is_system
-                else QUEUE_DJANGO_UVICORN_NGINX
+                else QUEUE_FASTAPI_UVICORN_NGINX
             )
 
             await base_sync.publish_once(
-                exchange=DJANGO_UVICORN_NGINX_EXCHANGE,
+                exchange=FASTAPI_UVICORN_NGINX_EXCHANGE,
                 routing_key=queue_name,
                 body=json.dumps(event_dict),
             )
@@ -46,7 +46,7 @@ async def status_endpoint(events: List[StatusEventSchema]):
 
     if errors:
         return JSONResponse(
-            status_code=status.HTTP_207_MULTI_STATUS,
+            status_code=status.HTTP_400_BAD_REQUEST,
             content={
                 "status": "PARTIAL_SUCCESS",
                 "processed": len(events) - len(errors),
