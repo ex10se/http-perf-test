@@ -107,7 +107,7 @@ func (h *StatusHandler) Handle(ctx echo.Context) error {
 	// Если были ошибки - возвращаем частичный успех
 	if len(errorsList) > 0 {
 		ctx.Response().Header().Set("Content-Type", "application/json")
-		ctx.Response().WriteHeader(http.StatusMultiStatus)
+		ctx.Response().WriteHeader(http.StatusBadRequest)
 		if err := json.NewEncoder(ctx.Response()).Encode(map[string]interface{}{
 			"status":    "PARTIAL_SUCCESS",
 			"processed": len(events) - len(errorsList),

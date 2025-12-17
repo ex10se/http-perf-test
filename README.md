@@ -192,7 +192,7 @@
 - github.com/rabbitmq/amqp091-go v1.10.0
 
 **Конфигурация сервера:**
-- Процессы: 5
+- Процессы: 10
 - ReadTimeout: 30s
 - WriteTimeout: 30s
 - IdleTimeout: 120s
@@ -209,7 +209,7 @@
 - github.com/rabbitmq/amqp091-go v1.10.0
 
 **Конфигурация сервера:**
-- Процессы: 5
+- Процессы: 10
 - ReadTimeout: 30s
 - WriteTimeout: 30s
 - IdleTimeout: 120s
@@ -227,7 +227,7 @@
 - github.com/valyala/fasthttp v1.68.0
 
 **Конфигурация сервера:**
-- Процессы: 5
+- Процессы: 10
 - ReadTimeout: 30s
 - WriteTimeout: 30s
 - IdleTimeout: 120s
@@ -245,7 +245,7 @@
 - github.com/gin-gonic/gin v1.11.0
 
 **Конфигурация сервера:**
-- Процессы: 5
+- Процессы: 10
 - ReadTimeout: 30s
 - WriteTimeout: 30s
 - IdleTimeout: 120s
@@ -263,7 +263,7 @@
 - github.com/labstack/echo/v4 v4.14.0
 
 **Конфигурация сервера:**
-- Процессы: 5
+- Процессы: 10
 - ReadTimeout: 30s
 - WriteTimeout: 30s
 - IdleTimeout: 120s

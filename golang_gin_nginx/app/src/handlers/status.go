@@ -106,7 +106,7 @@ func (h *StatusHandler) Handle(ctx *gin.Context) {
 	// Если были ошибки - возвращаем частичный успех
 	if len(errorsList) > 0 {
 		ctx.Header("Content-Type", "application/json")
-		ctx.Status(http.StatusMultiStatus)
+		ctx.Status(http.StatusBadRequest)
 		if err := json.NewEncoder(ctx.Writer).Encode(map[string]interface{}{
 			"status":    "PARTIAL_SUCCESS",
 			"processed": len(events) - len(errorsList),

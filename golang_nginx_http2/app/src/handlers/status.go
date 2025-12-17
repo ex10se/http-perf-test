@@ -117,7 +117,7 @@ func (h *StatusHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	// Если были ошибки - возвращаем частичный успех
 	if len(errors) > 0 {
 		w.Header().Set("Content-Type", "application/json")
-		w.WriteHeader(http.StatusMultiStatus)
+		w.WriteHeader(http.StatusBadRequest)
 		if err := json.NewEncoder(w).Encode(map[string]interface{}{
 			"status":    "PARTIAL_SUCCESS",
 			"processed": len(events) - len(errors),
