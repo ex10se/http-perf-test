@@ -1,0 +1,37 @@
+name: perf-test-go-fasthttp
+
+services:
+  go:
+    build:
+      context: ../../
+      dockerfile: ci/docker/backend/Dockerfile
+    restart: unless-stopped
+    volumes:
+      - go_fasthttp:/tmp/go
+    environment:
+      - DSN__RABBITMQ=${DSN__RABBITMQ}
+      - SOCKET_PATH=/tmp/go/app.sock
+    networks:
+      - perf-test-rmq
+
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "8087:80"
+    volumes:
+      - go_fasthttp:/tmp/go
+    depends_on:
+      - go
+    networks:
+      - perf-test-rmq
+
+volumes:
+  go_fasthttp:
+
+networks:
+  perf-test-rmq:
+    external: true
+    name: perf-test-rmq

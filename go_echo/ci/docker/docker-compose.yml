@@ -1,0 +1,37 @@
+name: perf-test-go-echo
+
+services:
+  go:
+    build:
+      context: ../../
+      dockerfile: ci/docker/backend/Dockerfile
+    restart: unless-stopped
+    volumes:
+      - go_echo:/tmp/go
+    environment:
+      - DSN__RABBITMQ=${DSN__RABBITMQ}
+      - SOCKET_PATH=/tmp/go/app.sock
+    networks:
+      - perf-test-rmq
+
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "8089:80"
+    volumes:
+      - go_echo:/tmp/go
+    depends_on:
+      - go
+    networks:
+      - perf-test-rmq
+
+volumes:
+  go_echo:
+
+networks:
+  perf-test-rmq:
+    external: true
+    name: perf-test-rmq
